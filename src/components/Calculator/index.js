@@ -50,6 +50,9 @@ export default class Calculator extends Component {
             equation += target;
 
         } else if (target === '+' || target === '-' || target === '*' || target === '/' || target === '%') {
+            if ((target === '*' || target === '/' || target === '%') && this.state.equation.length === 0) {
+                return;
+            }
             this.setState({ isContainDot: false });
             this.setState({ counterMaxLength: 0 });
             equation += ' ' + target + ' ';
