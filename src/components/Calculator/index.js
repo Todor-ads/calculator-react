@@ -12,7 +12,7 @@ export default class Calculator extends Component {
             result: 0,
             resultStore: [],
             index: -1,
-            counterMaxLenght: 0
+            counterMaxLength: 0
         }
     };
 
@@ -27,7 +27,7 @@ export default class Calculator extends Component {
         resultStore.push(resultObj)
         let index = this.state.index;
         index++;
-        return this.setState({ equation: '', result: result, resultStore: resultStore, counterMaxLenght: 0, index: index })
+        return this.setState({ equation: '', result: result, resultStore: resultStore, counterMaxLength: 0, index: index })
 
     }
 
@@ -37,14 +37,14 @@ export default class Calculator extends Component {
 
         let equation = this.state.equation;
         if ((target >= 0 && target <= 9) || target === '.') {
-            if (this.state.counterMaxLenght >= 9) {
+            if (this.state.counterMaxLength >= 9) {
                 return;
             }
-            this.setState({ counterMaxLenght: this.state.counterMaxLenght + 1 })
+            this.setState({ counterMaxLength: this.state.counterMaxLength + 1 })
             equation += target;
 
         } else if (target === '+' || target === '-' || target === '*' || target === '/' || target === '%') {
-            this.setState({ counterMaxLenght: 0 })
+            this.setState({ counterMaxLength: 0 })
             equation += ' ' + target + ' ';
 
         }
@@ -58,21 +58,23 @@ export default class Calculator extends Component {
 
     forward = () => {
         let index = this.state.index;
-        if (index >= this.state.resultStore.length ) {
-            return;
+       
+        
+        
+        if (index < this.state.resultStore.length-1 ) {
+            index++;
         }
         const resultObj = this.state.resultStore[index];
-        index++;
         this.setState({ result: resultObj.result, equation: resultObj.equation, index: index })
     }
 
     backward = () => {
         let index = this.state.index;
-        if (index <= 0) {
-            return;
+       
+        if (index > 0) {
+            index--;
         }
         const resultObj = this.state.resultStore[index];
-        index--;
         this.setState({ result: resultObj.result, equation: resultObj.equation, index: index })
     }
 
