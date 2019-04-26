@@ -12,13 +12,9 @@ export default class Calculator extends Component {
             result: 0,
             resultStore: [],
             index: 0,
-            counterMaxLenht: 0
+            counterMaxLenght: 0
         }
     };
-    // max lenght for equation
-    // block posible to enter two dot one after one
-    // block posible to press equal if not contein expresion
-    // logic to forlord and backup to resultStore
 
     calculateResult = () => {
 
@@ -31,7 +27,7 @@ export default class Calculator extends Component {
         resultStore.push(resultObj)
         let index = this.state.index;
         index++;
-        return this.setState({ equation: '', result: result, resultStore: resultStore, counterMaxLenht: 0, index: index })
+        return this.setState({ equation: '', result: result, resultStore: resultStore, counterMaxLenght: 0, index: index })
 
     }
 
@@ -41,14 +37,14 @@ export default class Calculator extends Component {
 
         let equation = this.state.equation;
         if ((target >= 0 && target <= 9) || target === '.') {
-            if (this.state.counterMaxLenht >= 9) {
+            if (this.state.counterMaxLenght >= 9) {
                 return;
             }
-            this.setState({ counterMaxLenht: this.state.counterMaxLenht + 1 })
+            this.setState({ counterMaxLenght: this.state.counterMaxLenght + 1 })
             equation += target;
 
         } else if (target === '+' || target === '-' || target === '*' || target === '/' || target === '%') {
-            this.setState({ counterMaxLenht: 0 })
+            this.setState({ counterMaxLenght: 0 })
             equation += ' ' + target + ' ';
 
         }
@@ -67,7 +63,7 @@ export default class Calculator extends Component {
         }
         const resultObj = this.state.resultStore[index];
         this.setState({ result: resultObj.result, equation: resultObj.equation,index:index })
-    }
+    }   
     backward = () => {
         let index = this.state.index;
         index--;
