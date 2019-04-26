@@ -1,0 +1,94 @@
+/* RESET CSS*/
+
+*,
+::after,
+::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 62.5%;
+    font-family: 'open-sans', sans-serif;
+}
+
+body{
+    font-family: inherit;
+}
+
+ /*VARIABLES*/
+:root{
+--color-white: #fff;
+--color-light-white:#eee;
+
+}
+.app{
+    height: 100vh;
+    width: 100%;
+    background-image:linear-gradient(to bottom right, rgba(216,14,91,.9), rgba(88,24,69,.9)),  url('./assets//math-back.jpg');
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.calculator{
+    height: 80vh;
+    width: 25%;
+    box-shadow: 0 2rem 4rem rgba(0,0,0,.4);
+    background-attachment: #222;
+}
+.result-screen{
+    height: 19vh;
+    font-size: 8rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+.computation-screen{
+height: 6vh;
+font-size: 2.5rem;
+display: flex;
+justify-content: flex-end;
+align-content: flex-end;
+}
+.keypad-row{
+    height: 11vh;
+    width: 100%;
+    display: flex;
+    color: #fff
+}
+.keyboard{
+    height: 55vh;
+    widows: 100%;
+}
+.button {
+    width: 25%;
+    height: 100%;
+    font-size: 3rem;
+    font-family: inherit;
+    background-color: #fff;
+    border: 1px solid transparent;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .2s;
+  }
+  .button:hover {
+    color: #eee;
+    background-color: #d40640;
+  }
+  .button:active {
+    transform: scale(.95);
+  }
+  .button--large {
+    width: 50%;
+    color: #fff;
+    background-color: #d40640;
+    transition: all .2s;
+  }
+  .button--large:hover {
+    background-color: #fff;
+    color: #d40640;
+  }
