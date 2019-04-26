@@ -58,8 +58,6 @@ export default class Calculator extends Component {
 
     forward = () => {
         let index = this.state.index;
-        console.log(index)
-        console.log(this.state.resultStore)
         if (index >= this.state.resultStore.length ) {
             return;
         }
@@ -70,9 +68,6 @@ export default class Calculator extends Component {
 
     backward = () => {
         let index = this.state.index;
-        
-        console.log(index)
-        console.log(this.state.resultStore)
         if (index <= 0) {
             return;
         }
