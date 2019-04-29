@@ -2,11 +2,11 @@ import React from 'react';
 
 const button = (props) =>{
     const classes = ['button'];
-    if(typeof props !== 'undefined' && typeof props.type !== 'undefined' ){
-        classes.push('button--' + props.type);
+    if(typeof value !== 'undefined' && typeof props.value !== 'undefined' ){
+        classes.push('button--' + props.value);
     }
    return( 
-   <button className={classes.join(' ')} onClick={props.onButtonPress}>
+<button className={'button_'+ props.value+" button"} onClick={props.onButtonPress}>
     {props.children}
     </button>
    )
