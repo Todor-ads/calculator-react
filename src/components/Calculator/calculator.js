@@ -14,14 +14,21 @@ export default class Calculator extends Component {
             index: -1,
             counterMaxLength: 0,
             isContainDot: false,
-            maxPossibleOperator: 0
+            maxPossibleOperator: 0,
+            tempEquationScreen: [''],
+            currentIndex:-1
         }
     };
 
     calculateResult = () => {
         let { resultStore, equation } = this.state;
-        let result = math.eval(equation);
-
+        let result
+        try{
+            result = math.eval(equation);
+            
+        }catch(err){
+           return window.alert(err.message)
+        }
         if (equation.length === 0) {
             return
         }
@@ -40,8 +47,8 @@ export default class Calculator extends Component {
 
         const target = event.target.innerHTML;
 
-        let { equation, maxPossibleOperator, counterMaxLength, isContainDot } = this.state;
-        if ((target >= 0 && target <= 9) || target === '.') {
+        let { equation, maxPossibleOperator, counterMaxLength, isContainDot, tempEquationScreen, currentIndex } = this.state;
+        if ((target >= 0 && target <= 9) || target === '.' || target === '(' || target === ')') {
 
             if (counterMaxLength >= 9) {
                 return;
@@ -66,13 +73,15 @@ export default class Calculator extends Component {
             equation += ' ' + target + ' ';
 
         }
-        this.setState({ equation: equation });
+        currentIndex++
+         tempEquationScreen.push(equation)
+        this.setState({ equation: equation, tempEquationScreen: tempEquationScreen, currentIndex: currentIndex});
     }
 
     clear = () => {
         this.setState({ equation: '', result: 0 });
     }
-
+    //// DEPRECATED \\\\
     forward = () => {
 
         let {index} = this.state;
@@ -83,7 +92,16 @@ export default class Calculator extends Component {
         const resultObj = this.state.resultStore[index];
         this.setState({ result: resultObj.result, equation: resultObj.equation, index: index });
     }
-
+    forwardEquation = () =>{
+        let {index, tempEquationScreen,equation} = this.state;
+        if (index < tempEquationScreen.length-1){
+            index++;
+        }
+        const resultEquation = tempEquationScreen[index]
+        console.log(resultEquation)
+        this.setState({equation: resultEquation,index: index})
+    }
+    //// DEPRECATED \\\\
     backward = () => {
         let index = this.state.index;
 
@@ -92,6 +110,15 @@ export default class Calculator extends Component {
         }
         const resultObj = this.state.resultStore[index];
         this.setState({ result: resultObj.result, equation: resultObj.equation, index: index });
+    }
+    backwardEquation = () =>{
+        let {index, tempEquationScreen,equation} = this.state;
+        if (index > 0){
+            index--;
+        }
+        const resultEquation = tempEquationScreen[index]
+        console.log(resultEquation)
+        this.setState({equation: resultEquation,index: index})
     }
 
     render() {
@@ -107,8 +134,8 @@ export default class Calculator extends Component {
                         onButtonPress={this.onButtonPress}
                         calculateResult={this.calculateResult}
                         clear={this.clear}
-                        forward={this.forward}
-                        backward={this.backward} />
+                        forward={this.forwardEquation}
+                        backward={this.backwardEquation} />
 
                 </main>
             </div>

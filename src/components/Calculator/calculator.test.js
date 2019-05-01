@@ -95,7 +95,6 @@ describe('check for correct calculation ', () => {
 })
 describe('functionality clear', () => {
     it('clearing the result after computation', () => {
-        //const eventFK = sinon.spy()
         const wrapper = mount(<Calculator />);
         wrapper.find('button.button_one')
             .simulate('click')
