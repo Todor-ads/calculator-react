@@ -32,7 +32,7 @@ body{
     align-items: center;
 }
 .calculator{
-    height: 80vh;
+    height: 83vh;
     width: 25%;
     box-shadow: 0 2rem 4rem rgba(0,0,0,.4);
     background-attachment: #222;
@@ -95,4 +95,7 @@ align-content: flex-end;
   .button--large:hover {
     background-color: #fff;
     color: #d40640;
+  }
+.button_zero.button {
+    width: 50%
   }

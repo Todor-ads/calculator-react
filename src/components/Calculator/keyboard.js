@@ -6,13 +6,16 @@ const keyboard = (props) => (
     <section className="keyboard">
         <KeyRow>
             <Button onButtonPress={props.clear} value='c'>C</Button>
+            <Button onButtonPress={props.resetState} value='ac'>AC</Button>
             <Button onButtonPress={props.backward} value='backward'>&larr;</Button>
             <Button onButtonPress={props.forward} value='forward'>&rarr;</Button>
-            <Button onButtonPress={props.onButtonPress} value='dividing'>/</Button>
+            
         </KeyRow>
         <KeyRow>
-            <Button onButtonPress={props.onButtonPress} value='zero'>(</Button>
-            <Button onButtonPress={props.onButtonPress} value='dot'>)</Button>
+            <Button onButtonPress={props.onButtonPress} value='openBracket'>(</Button>
+            <Button onButtonPress={props.onButtonPress} value='closeBracket'>)</Button>
+            <Button onButtonPress={props.onButtonPress} value='percentage'>%</Button>
+            <Button onButtonPress={props.onButtonPress} value='dividing'>/</Button>
         </KeyRow>
         <KeyRow>
             <Button onButtonPress={props.onButtonPress} value='seven'>7</Button>
@@ -42,7 +45,7 @@ const keyboard = (props) => (
             <Button onButtonPress={props.onButtonPress} value='zero'>0</Button>
             <Button onButtonPress={props.onButtonPress} value='dot'>.</Button>
             <Button onButtonPress={props.calculateResult} value='equal'>=</Button>
-            <Button onButtonPress={props.onButtonPress} value='percentage'>%</Button>
+            
         </KeyRow>
         
     </section>

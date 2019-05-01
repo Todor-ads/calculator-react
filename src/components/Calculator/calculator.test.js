@@ -6,15 +6,17 @@ import sinon from 'sinon'
 describe('Calculator component', () => {
     it('default state', () => {
         const wrapper = shallow(<Calculator />);
-        const { equation, result, resultStore, index, counterMaxLength, isContainDot } = wrapper.state();
+        const { equation, result, resultStore, index, counterMaxLength, isContainDot, tempEquationScreen, currentIndex } = wrapper.state();
         expect(equation).toEqual('');
         expect(result).toEqual(0);
         expect(resultStore).toEqual([]);
         expect(index).toEqual(-1)
         expect(counterMaxLength).toEqual(0);
         expect(isContainDot).toEqual(false);
-
+        expect(tempEquationScreen.length).toEqual(1);
+        expect(currentIndex).toEqual(0);
     });
+
 })
 
 describe('functionality onButtonPress', () => {
@@ -139,7 +141,8 @@ describe('functionality to save result to result store', () => {
         expect(resultStore.length).toEqual(2);
     })
 })
-describe('functionality to save result to result store', () => {
+
+describe('functionality to move left and right to equation', () => {
     let wrapper;
     beforeEach(() => {
         wrapper = mount(<Calculator />);
@@ -149,55 +152,56 @@ describe('functionality to save result to result store', () => {
             .simulate('click')
         wrapper.find('button.button_one')
             .simulate('click')
-        wrapper.find('button.button_equal')
-            .simulate('click')
-        wrapper.find('button.button_two')
-            .simulate('click')
-        wrapper.find('button.button_collect')
-            .simulate('click')
-        wrapper.find('button.button_two')
-            .simulate('click')
-        wrapper.find('button.button_equal')
-            .simulate('click')
-    })
-    it('move one time left to result store', () => {
-        wrapper.find('button.button_backward')
-            .simulate('click')
-        const { equation, result } = wrapper.state();
-        expect(equation).toEqual('1 + 1')
-        expect(result).toEqual(2)
     })
 
-    it('try to left out of resultStore', () => {
+    it('move left to equation', () => {
         wrapper.find('button.button_backward')
             .simulate('click')
-        wrapper.find('button.button_backward')
-            .simulate('click')
-        wrapper.find('button.button_backward')
-            .simulate('click')
-        const { equation, result } = wrapper.state();
-        expect(equation).toEqual('1 + 1')
-        expect(result).toEqual(2)
-    })
-    it('move one time left and back to right to result store', () => {
-        wrapper.find('button.button_backward')
-            .simulate('click')
-        wrapper.find('button.button_forward')
-            .simulate('click')
-        const { equation, result } = wrapper.state();
-        expect(equation).toEqual('2 + 2')
-        expect(result).toEqual(4)
+        const { equation } = wrapper.state();
+        expect(equation).toEqual('1 + ')
     })
 
-    it('try to right out of resultStore', () => {
+    it('try not to leave the left of an equation', () => {
+        wrapper.find('button.button_backward')
+            .simulate('click')
+        wrapper.find('button.button_backward')
+            .simulate('click')
+        wrapper.find('button.button_backward')
+            .simulate('click')
+        wrapper.find('button.button_backward')
+            .simulate('click')
+        wrapper.find('button.button_backward')
+            .simulate('click')
+        const { equation } = wrapper.state();
+        expect(equation).toEqual('')
+    })
+
+    it('move one time left and back to right to equation', () => {
         wrapper.find('button.button_backward')
             .simulate('click')
         wrapper.find('button.button_forward')
             .simulate('click')
+        const { equation } = wrapper.state();
+        expect(equation).toEqual('1 + 1')
+    })
+
+    it('move two time left and back to right to equation', () => {
+        wrapper.find('button.button_backward')
+            .simulate('click')
+            wrapper.find('button.button_backward')
+            .simulate('click')
         wrapper.find('button.button_forward')
             .simulate('click')
-        const { equation, result } = wrapper.state();
-        expect(equation).toEqual('2 + 2')
-        expect(result).toEqual(4)
+        const { equation } = wrapper.state();
+        expect(equation).toEqual('1 + ')
+    })
+
+    it('try not to leave the right of an equation', () => {
+        wrapper.find('button.button_forward')
+            .simulate('click')
+        wrapper.find('button.button_forward')
+            .simulate('click')
+        const { equation } = wrapper.state();
+        expect(equation).toEqual('1 + 1')
     })
 })
